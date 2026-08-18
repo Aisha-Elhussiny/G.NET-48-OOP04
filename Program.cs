@@ -28,6 +28,126 @@
             // A class cannot inherit from multiple abstract classes in C#. C# supports single inheritance for classes, meaning a class can only inherit from one base class (abstract or concrete). However, a class can implement multiple interfaces, allowing it to inherit behavior from multiple sources. This is one of the key differences between abstract classes and interfaces in C#.
             #endregion
             #endregion
-        }
+
+            #region practical project
+
+                DeliveryAddress address1 =
+                    new DeliveryAddress(
+                        "Cairo",
+                        "Tahrir Street",
+                        15);
+
+                DeliveryAddress address2 =
+                    new DeliveryAddress(
+                        "Giza",
+                        "Pyramids Street",
+                        20);
+
+                DeliveryAddress address3 =
+                    new DeliveryAddress(
+                        "Alexandria",
+                        "Sea Street",
+                        10);
+
+                StandardShipment standardShipment =
+                    new StandardShipment(
+                        "SH001",
+                        "Laptop",
+                        3,
+                        80,
+                        address1);
+
+                ExpressShipment expressShipment =
+                    new ExpressShipment(
+                        "SH002",
+                        "Mobile Phone",
+                        2,
+                        60,
+                        address2,
+                        30);
+
+                InternationalShipment internationalShipment =
+                    new InternationalShipment(
+                        "SH003",
+                        "Television",
+                        8,
+                        120,
+                        address3,
+                        "Germany",
+                        100);
+
+                Driver driver =
+                    new Driver(
+                        1,
+                        "Ahmed Mohamed",
+                        "01012345678");
+
+                DeliveryCenter center =
+                    new DeliveryCenter("Cairo Center");
+
+                center.Driver = driver;
+
+                center.AddShipment(standardShipment);
+                center.AddShipment(expressShipment);
+                center.AddShipment(internationalShipment);
+
+                center.PrintAllShipments();
+
+            
+                center.PrintTrackingStatuses();
+
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine("Insurance");
+                Console.WriteLine("--------------------------------");
+
+                DeliveryReport.PrintInsurance(standardShipment);
+                DeliveryReport.PrintInsurance(expressShipment);
+                DeliveryReport.PrintInsurance(internationalShipment);
+
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine("ITrackable Array");
+                Console.WriteLine("--------------------------------");
+
+                ITrackable[] trackableShipments =
+                {
+                standardShipment,
+                expressShipment,
+                internationalShipment
+            };
+            //de l array of ITrackable and print the tracking status of each shipment using the GetTrackingStatus() method.
+
+            for (int i = 0; i < trackableShipments.Length; i++)
+                {
+                    Console.WriteLine(
+                        trackableShipments[i].GetTrackingStatus());
+                }
+
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine("IInsurable Array");
+                Console.WriteLine("--------------------------------");
+
+                IInsurable[] insurableShipments =
+                {
+                standardShipment,
+                expressShipment,
+                internationalShipment
+            };
+            //de l array of IInsurable and print the insurance cost of each shipment using the CalculateInsurance() method.
+
+            for (int i = 0; i < insurableShipments.Length; i++)
+                {
+                    Console.WriteLine(
+                        "Insurance Cost: "
+                        + insurableShipments[i].CalculateInsurance()
+                        + " EGP");
+                }
+
+            
+
+              
+    
+
+            #endregion
+}
     }
 }
